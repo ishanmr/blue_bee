@@ -13,6 +13,23 @@
 
   <style>
     /* ==========================================================================
+       [CHANGE 1] Load "Tan Nimbus" Font
+       Place your TAN-NIMBUS.woff2 or TAN-NIMBUS.ttf file in the same folder,
+       or update the url() path below to match your font file location.
+       ========================================================================== */
+    @font-face {
+      font-family: 'Tan Nimbus';
+      src: local('Tan Nimbus'),
+           local('TAN - NIMBUS'),
+           local('TAN-NIMBUS'),
+           url('TAN-NIMBUS.woff2') format('woff2'),
+           url('TAN-NIMBUS.ttf') format('truetype');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    /* ==========================================================================
        CSS Variables & Global Reset
        ========================================================================== */
     :root {
@@ -22,6 +39,8 @@
       --line: #e4e4e4;
       --card: #f1f0ed;
       --acc: #000000;
+      --brand-blue: #0241a0;
+      --font-brand: 'Tan Nimbus', 'TAN - NIMBUS', Georgia, serif;
       color-scheme: light dark;
       box-sizing: border-box;
       padding-top: env(safe-area-inset-top, 0px);
@@ -37,6 +56,7 @@
         --line: #2a2a2a;
         --card: #161616;
         --acc: #7f92ff;
+        --brand-blue: #3b76f6;
       }
     }
 
@@ -47,6 +67,7 @@
       --line: #2a2a2a;
       --card: #161616;
       --acc: #7f92ff;
+      --brand-blue: #3b76f6;
     }
 
     * {
@@ -68,7 +89,6 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* Safe Area Notch Fill for iOS devices */
     body::before {
       content: "";
       position: fixed;
@@ -94,6 +114,49 @@
     :focus-visible {
       outline: 2px solid var(--acc);
       outline-offset: 2px;
+    }
+
+    /* ==========================================================================
+       [CHANGE 2] Text-Based Brand Logo Styles (Tan Nimbus + Bee Icon)
+       ========================================================================== */
+    .logo {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: var(--font-brand);
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1;
+      letter-spacing: 0.01em;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .logo .blu {
+      color: var(--brand-blue);
+    }
+
+    .logo .bee {
+      color: var(--fg);
+    }
+
+    .logo .bee-icon {
+      width: 1.15em;
+      height: 1.15em;
+      margin: 0 0.04em;
+      transform: translateY(-0.18em);
+      flex-shrink: 0;
+      overflow: visible;
+    }
+
+    /* Inline Brand Name Mentions in Prose/Footer */
+    .brand-inline {
+      font-family: var(--font-brand);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-inline .blu {
+      color: var(--brand-blue);
     }
 
     /* Common Buttons */
@@ -180,30 +243,6 @@
       text-underline-offset: 5px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-    }
-
-    .logo svg {
-      width: 30px;
-      height: 30px;
-      color: var(--fg);
-    }
-
-    .logo b {
-      font-weight: 900;
-      font-size: 24px;
-      letter-spacing: -0.05em;
-    }
-
-    .logo img {
-      height: 34px;
-      width: auto;
-      display: block;
-    }
-
     .hr {
       display: flex;
       justify-content: flex-end;
@@ -218,7 +257,7 @@
     }
 
     /* ==========================================================================
-       Hero Section
+       Hero Section (Large Text Brand Lockup)
        ========================================================================== */
     .hero {
       background: #000;
@@ -234,24 +273,34 @@
       color: #bdbdbd;
     }
 
-    .hero h1 {
-      line-height: 0;
-    }
-
-    .hero .hl {
-      display: block;
-      width: min(100%, 1150px);
-      height: auto;
-      filter: invert(1) hue-rotate(180deg);
-    }
-
-    .big {
-      font-weight: 900;
-      font-size: clamp(60px, 21.5vw, 380px);
-      letter-spacing: -0.065em;
-      line-height: 0.8;
-      margin-left: -0.04em;
+    /* Hero H1 uses Tan Nimbus text instead of an image */
+    .hero h1.logo-hero {
+      display: inline-flex;
+      align-items: baseline;
+      font-family: var(--font-brand);
+      font-weight: 700;
+      font-size: clamp(54px, 16.5vw, 260px);
+      line-height: 1.05;
+      letter-spacing: 0.01em;
       white-space: nowrap;
+      padding-top: 0.2em;
+    }
+
+    .hero h1.logo-hero .blu {
+      color: #1c5cff; /* Vivid royal blue on black hero background */
+    }
+
+    .hero h1.logo-hero .bee {
+      color: #ffffff;
+    }
+
+    .hero h1.logo-hero .bee-icon {
+      width: 1.12em;
+      height: 1.12em;
+      margin: 0 0.03em;
+      transform: translateY(-0.18em);
+      flex-shrink: 0;
+      overflow: visible;
     }
 
     .hrow {
@@ -259,7 +308,7 @@
       justify-content: space-between;
       align-items: flex-end;
       gap: 24px;
-      margin-top: 40px;
+      margin-top: 32px;
       flex-wrap: wrap;
     }
 
@@ -342,7 +391,6 @@
       line-height: 1;
     }
 
-    /* Filter Chips */
     .chips {
       display: flex;
       gap: 8px;
@@ -374,7 +422,6 @@
       gap: 28px 12px;
     }
 
-    /* Product Card */
     .im {
       position: relative;
       aspect-ratio: 3/4;
@@ -418,7 +465,6 @@
       color: #e0243a;
     }
 
-    /* Quick Add Drawer on Product Card */
     .qa {
       position: absolute;
       left: 0;
@@ -629,7 +675,7 @@
     }
 
     footer .logo {
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
 
     .fine {
@@ -790,19 +836,6 @@
     }
 
     /* ==========================================================================
-       Color Inversions / Dark Mode Image Adaptations
-       ========================================================================== */
-    @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) .adapt {
-        filter: invert(1) hue-rotate(180deg);
-      }
-    }
-
-    :root[data-theme="dark"] .adapt {
-      filter: invert(1) hue-rotate(180deg);
-    }
-
-    /* ==========================================================================
        Responsive Media Queries
        ========================================================================== */
     @media (max-width: 900px) {
@@ -873,18 +906,14 @@
       .cat {
         min-height: 440px;
       }
-      .logo b {
-        font-size: 20px;
+      .logo {
+        font-size: 22px;
       }
       .hero {
         padding-top: 36px;
       }
-      .logo img {
-        height: 28px;
-      }
     }
 
-    /* Motion Accessibility */
     @media (prefers-reduced-motion: reduce) {
       * {
         animation: none !important;
@@ -916,9 +945,26 @@
       <a href="#drop">Streetwear</a>
       <a href="#help">Help</a>
     </nav>
+
+    <!-- [CHANGE 3] Header Brand Name as Tan Nimbus Text + Bee SVG -->
     <a class="logo" href="#top" aria-label="Blubee home">
-      <img class="adapt" data-wm width="1100" height="318" alt="Blubee">
+      <span class="blu">Blu</span>
+      <svg class="bee-icon" viewBox="0 0 140 130" aria-hidden="true">
+        <!-- Antennae -->
+        <line x1="52" y1="10" x2="62" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+        <line x1="88" y1="10" x2="78" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+        <!-- Left & Right Wings -->
+        <path d="M60 44 C42 26, 8 25, 8 44 C8 63, 42 72, 60 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+        <path d="M80 44 C98 26, 132 25, 132 44 C132 63, 98 72, 80 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+        <!-- Blue Chevron Stripes -->
+        <path d="M55 56 L70 66 L85 56 L92 67 L70 81 L48 67 Z" fill="var(--brand-blue)"/>
+        <path d="M48 76 L70 90 L92 76 L92 91 L70 105 L48 91 Z" fill="var(--brand-blue)"/>
+        <!-- Bottom Stinger / Abdomen Curve -->
+        <path d="M51 103 C51 126, 89 126, 89 103 L81 107 C80 116, 60 116, 59 107 Z" fill="currentColor"/>
+      </svg>
+      <span class="bee">bee</span>
     </a>
+
     <div class="hr">
       <button id="bag" aria-label="Open bag">Bag (<span id="cnt">0</span>)</button>
     </div>
@@ -928,7 +974,22 @@
     <!-- Hero Section -->
     <section class="hero">
       <small>Autumn/Winter 26</small>
-      <h1><img class="hl" data-wm width="1100" height="318" alt="Blubee"></h1>
+
+      <!-- [CHANGE 4] Hero H1 Brand Name as Tan Nimbus Text + Bee SVG -->
+      <h1 class="logo-hero" aria-label="Blubee">
+        <span class="blu">Blu</span>
+        <svg class="bee-icon" viewBox="0 0 140 130" aria-hidden="true">
+          <line x1="52" y1="10" x2="62" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="88" y1="10" x2="78" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+          <path d="M60 44 C42 26, 8 25, 8 44 C8 63, 42 72, 60 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+          <path d="M80 44 C98 26, 132 25, 132 44 C132 63, 98 72, 80 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+          <path d="M55 56 L70 66 L85 56 L92 67 L70 81 L48 67 Z" fill="#1c5cff"/>
+          <path d="M48 76 L70 90 L92 76 L92 91 L70 105 L48 91 Z" fill="#1c5cff"/>
+          <path d="M51 103 C51 126, 89 126, 89 103 L81 107 C80 116, 60 116, 59 107 Z" fill="currentColor"/>
+        </svg>
+        <span class="bee">bee</span>
+      </h1>
+
       <div class="hrow">
         <p>Everyday essentials and loud streetwear, cut for long Indian summers and the short winter that follows.</p>
         <div>
@@ -1014,8 +1075,19 @@
   <!-- Footer -->
   <footer id="help">
     <div>
-      <div class="logo">
-        <img class="adapt" data-wm width="1100" height="318" alt="Blubee">
+      <!-- [CHANGE 5] Footer Brand Name as Tan Nimbus Text + Bee SVG -->
+      <div class="logo" aria-label="Blubee">
+        <span class="blu">Blu</span>
+        <svg class="bee-icon" viewBox="0 0 140 130" aria-hidden="true">
+          <line x1="52" y1="10" x2="62" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+          <line x1="88" y1="10" x2="78" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+          <path d="M60 44 C42 26, 8 25, 8 44 C8 63, 42 72, 60 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+          <path d="M80 44 C98 26, 132 25, 132 44 C132 63, 98 72, 80 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+          <path d="M55 56 L70 66 L85 56 L92 67 L70 81 L48 67 Z" fill="var(--brand-blue)"/>
+          <path d="M48 76 L70 90 L92 76 L92 91 L70 105 L48 91 Z" fill="var(--brand-blue)"/>
+          <path d="M51 103 C51 126, 89 126, 89 103 L81 107 C80 116, 60 116, 59 107 Z" fill="currentColor"/>
+        </svg>
+        <span class="bee">bee</span>
       </div>
       <p style="color:var(--mut);max-width:30ch">Clothing for people who dress on purpose. Designed in India.</p>
     </div>
@@ -1040,13 +1112,16 @@
     <div>
       <h4>Company</h4>
       <ul>
-        <li>About Blubee</li>
+        <!-- [CHANGE 6] Inline Brand Name in Tan Nimbus -->
+        <li>About <span class="brand-inline"><span class="blu">Blu</span>bee</span></li>
         <li>Careers</li>
         <li>Contact us</li>
         <li>Instagram</li>
       </ul>
     </div>
-    <p class="fine">© 2026 Blubee. All prices in Indian rupees, inclusive of GST. This is a demo storefront. Website by ishanmr.</p>
+    <p class="fine">
+      © 2026 <span class="brand-inline"><span class="blu">Blu</span>bee</span>. All prices in Indian rupees, inclusive of GST. This is a demo storefront. Website by ishanweb.
+    </p>
   </footer>
 
   <!-- Shopping Bag Overlay & Drawer -->
@@ -1073,18 +1148,23 @@
   <!-- JavaScript -->
   <script>
     /* ==========================================================================
-       Asset Placeholders (Base64-encoded Wordmarks & Icons)
-       ========================================================================== */
-    const WM = "data:image/png;base64,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YRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiAYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGAYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGAYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYLiGYriGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYLiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRoGBRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYiGYRiGYRiGYRiGYRiGYRiGYGiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYriGYRiGYriGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRiGYRhICAtYXBQYXBjZWx4gAAIABJREFUeJztWwtwG+W5P38+t5oicVHgv+73B25W3L167xO32b1zfc7Ze0bZ5rff1x9j/e6Tz6m6nflZtrZfGk3eWdfuC/jTqJ4/KfcX1v1b9/e6r3/l193vd01tM2d979r/YvWc73797qveLz2LqL5n3eP3a9WJ9vXf1+2/e/r52/O/r3p5t8/z7vff59bM7d2/s/e5VeeZ7/6q/8fU+Lqf1T/r1rWvX57n01c/v6uf2/V+e/1+q/drVd1fv+t5v7/bZ87O1Zq1v8+/W17d/f3Zvd/N9f+7fq+n9V5b+157/d5/t5659vX1/F39z3b/7Xb+qfdV897Vz/v397f3bWf7r7u/+V72/Xv+0dYk/T96k9L/7nO/t0r/924+o+p/5v+v/3/77937q3+9/b7qH9Xvff0/W/9M7//u92ft+9X/bN9f+3+v/2/1vdX/V/+ffb+3/9n9f6t/b3f6r/q93f/b/d/Z53Z/b6v/f69/271Pq+/v/nnttuz3+v3u/k71Gf1/3n3u3a//d77Hvv/+2fv9fvfvd/9/u/9/t/9/9//T/c67f0f3u93/7v3n3f//pL/r9ntt/5r2/1f/265/T/U5+z1Xff/eXq+63+n6f+p5T5Tf1f2e/qT9f7vf2f293d/t/nvf/fvK3z5V/9vu97vfX/9/3f/z9vNfV71P9ffW/7vq71a/2/3vdH8f9ffu/o4/1/6/7nO1P0u9v1Wfq+/r/r6r3+n+fuv//32fv/ufvf8/d35/95y7v9P9fWv/v/vvdv/b/Tvf3+N+v3v+3/3n3b+v+t2qf0f1Wv9Xft39nrv/Xvf3df/97vnv/v91f86q3+n+97v/f/f/v3vvqj+/+z1d5zP//tW/527fWf3b7u9v//3b98O36u/Z/f9r//1uf/b49e/N5a+rvu/un6/+P+3/n3a/V32/7r+z+9ju73b//9Xfb//+q9/p9t9v/8863+v+G3T/bvVzV/9e/d9q92j223bfb9f/b/f//8Z9a/t1/r/d/7v/9/6/W/29u//e7v99/9+r37tqv/b2+6rfq/8/7v3Oqrdq/V37f1Xfv/83/Xf3/q7693f/z1b/n7f/tvrz3f7P7v9d/T/f/111+e909//v3397/R9v/1rd/v32e67/XfV/V3/3/r/P7/tqf9b2d6i/f/e7/Z91v9P9ffT/3v37q7+z/vftv0v/d1b/b6v/vft/V3+/+r3q73X/3d3/z+6f1v9e/Z36d6v9rvpn1P89u79Tf3/3Z+q/+7/f//8/Wf9N9/793v3+7r/x3b+/+7v977v/rf6tV/989T5fV/V+tf/fP7z7/9//9+5/b/XvV/9W/W5d/7uqf9/9/urvu/737vd3/+3Vv1f/f/f/d9Xvrvp3V79X/f2q99f/v/v/1//+1T9b/X/X77/7b6v+3e7/v/r/f/9t979f/X+7v9d+3/3//73+7+363bvf8/d//1/6f//+F7/4xf/w/wEMAP/aGk8U81uFAAAAAElFTkSuQmCC";
-    const LOGO = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='currentColor' stroke-width='6'%3E%3Cpath d='M25 20h30a20 20 0 0 1 0 40H25z'/%3E%3Cpath d='M25 50h35a20 20 0 0 1 0 40H25z'/%3E%3C/svg%3E";
-
-    /* ==========================================================================
        SVG Vector Paths & Illustrative Details
        ========================================================================== */
     const STROKE_COLOR = "rgba(128,128,128,.8)";
     const AVAILABLE_SIZES = ["S", "M", "L", "XL"];
 
-    // Base wireframe shapes for apparel types
+    // Reusable Bee Icon SVG for Empty Bag State
+    const BEE_ICON_SVG = `
+      <svg viewBox="0 0 140 130" width="56" height="56" aria-hidden="true" style="display:block;margin-bottom:12px">
+        <line x1="52" y1="10" x2="62" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+        <line x1="88" y1="10" x2="78" y2="27" stroke="currentColor" stroke-width="5.5" stroke-linecap="round"/>
+        <path d="M60 44 C42 26, 8 25, 8 44 C8 63, 42 72, 60 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+        <path d="M80 44 C98 26, 132 25, 132 44 C132 63, 98 72, 80 44 Z" fill="none" stroke="currentColor" stroke-width="6.5" stroke-linejoin="round"/>
+        <path d="M55 56 L70 66 L85 56 L92 67 L70 81 L48 67 Z" fill="var(--brand-blue)"/>
+        <path d="M48 76 L70 90 L92 76 L92 91 L70 105 L48 91 Z" fill="var(--brand-blue)"/>
+        <path d="M51 103 C51 126, 89 126, 89 103 L81 107 C80 116, 60 116, 59 107 Z" fill="currentColor"/>
+      </svg>`;
+
     const GARMENT_SHAPES = {
       tee:    "M30 15L10 28L18 44L28 38V105H72V38L82 44L90 28L70 15Q50 30 30 15Z",
       hoodie: "M30 18L8 62L20 68L28 48V106H72V48L80 68L92 62L70 18Q50 32 30 18Z",
@@ -1096,10 +1176,8 @@
       tank:   "M36 8H44L50 24L56 8H64L68 40L66 108H34L32 40Z"
     };
 
-    // Helper function for rendering SVG strokes
     const renderStroke = d => `<path d="${d}" fill="none" stroke="${STROKE_COLOR}" stroke-width="1.6"/>`;
 
-    // Supplementary illustration overlays for garment details
     const GARMENT_DETAILS = {
       tee:    p => `<rect x="38" y="52" width="24" height="18" fill="${p.b}" opacity=".85"/>`,
       hoodie: () => renderStroke("M38 18Q50 0 62 18M36 82H64L66 98H34Z"),
@@ -1110,11 +1188,6 @@
       dress:  () => renderStroke("M36 42H64")
     };
 
-    /**
-     * Builds the complete SVG markup for a given product or icon slot
-     * @param {Object} p - Properties: shape (s), garment color (g), background color (b)
-     * @returns {string} SVG string
-     */
     const renderArtSvg = p => `
       <svg viewBox="0 0 100 120" aria-hidden="true">
         <path d="${GARMENT_SHAPES[p.s]}" fill="${p.g}"/>
@@ -1142,7 +1215,6 @@
     let cartItems = [];
     const wishlistIds = new Set();
 
-    // DOM Utility Functions
     const $ = selector => document.querySelector(selector);
     const formatINR = amount => "₹" + amount.toLocaleString("en-IN");
     const getProductById = id => PRODUCTS.find(product => product.id === id);
@@ -1150,9 +1222,6 @@
     /* ==========================================================================
        Render Functions
        ========================================================================== */
-    /**
-     * Generates HTML markup for an individual product card
-     */
     const createProductCard = product => `
       <article class="pc" data-id="${product.id}">
         <div class="im" style="background:${product.b}">
@@ -1174,9 +1243,6 @@
         </div>
       </article>`;
 
-    /**
-     * Renders products to the DOM based on active filters
-     */
     function renderProducts() {
       const filtered = PRODUCTS.filter(p => 
         currentFilter === "all" || 
@@ -1192,9 +1258,6 @@
       });
     }
 
-    /**
-     * Synchronizes and renders the current shopping cart state
-     */
     function updateCartUI() {
       const totalCount = cartItems.reduce((acc, item) => acc + item.q, 0);
       const totalPrice = cartItems.reduce((acc, item) => acc + item.q * getProductById(item.id).p, 0);
@@ -1202,7 +1265,6 @@
       $("#cnt").textContent = totalCount;
       $("#tot").textContent = formatINR(totalPrice);
 
-      // Shipping threshold notification calculation
       if (!totalCount) {
         $("#ship").textContent = "";
       } else if (totalPrice >= 1999) {
@@ -1211,7 +1273,6 @@
         $("#ship").textContent = `Add ${formatINR(1999 - totalPrice)} more for free shipping.`;
       }
 
-      // Populate line items or empty state
       if (cartItems.length) {
         $("#ci").innerHTML = cartItems.map(item => {
           const product = getProductById(item.id);
@@ -1235,16 +1296,12 @@
       } else {
         $("#ci").innerHTML = `
           <div class="em">
-            <img class="adapt" src="${MK}" alt="" style="height:56px;display:block;margin-bottom:12px">
+            ${BEE_ICON_SVG}
             Your bag is empty. Add something from New in.
           </div>`;
       }
     }
 
-    /**
-     * Triggers a temporary toast notification overlay
-     * @param {string} msg Text to display
-     */
     function showToast(msg) {
       const toastEl = $("#toast");
       toastEl.textContent = msg;
@@ -1253,19 +1310,11 @@
       showToast.timer = setTimeout(() => toastEl.classList.remove("on"), 2200);
     }
 
-    /**
-     * Toggles side cart visibility
-     * @param {boolean} isOpen 
-     */
     const toggleCart = isOpen => {
       $("#dr").classList.toggle("on", isOpen);
       $("#ov").classList.toggle("on", isOpen);
     };
 
-    /**
-     * Set active product category filter
-     * @param {string} category 
-     */
     function setCategoryFilter(category) {
       currentFilter = category;
       renderProducts();
@@ -1274,7 +1323,6 @@
     /* ==========================================================================
        Event Listeners & Interaction Handlers
        ========================================================================== */
-    // Delegate clicks within the product catalog grid
     $("#grid").addEventListener("click", e => {
       const cardEl = e.target.closest(".pc");
       if (!cardEl) return;
@@ -1282,12 +1330,10 @@
       const id = +cardEl.dataset.id;
       const product = getProductById(id);
 
-      // Size Selection
       if (e.target.closest(".sz")) {
         cardEl.querySelectorAll(".sz").forEach(el => el.classList.remove("on"));
         e.target.classList.add("on");
       } 
-      // Add to Bag Action
       else if (e.target.closest(".add")) {
         const selectedSize = cardEl.querySelector(".sz.on").textContent;
         const itemKey = id + selectedSize;
@@ -1301,7 +1347,6 @@
         updateCartUI();
         showToast(`${product.n} added to your bag`);
       } 
-      // Wishlist Toggle Action
       else if (e.target.closest(".wish")) {
         const wishBtn = e.target.closest(".wish");
         if (wishlistIds.has(id)) {
@@ -1316,7 +1361,6 @@
       }
     });
 
-    // Cart Quantity Adjustment (+ / -)
     $("#ci").addEventListener("click", e => {
       const button = e.target.closest("[data-k]");
       if (!button) return;
@@ -1334,7 +1378,6 @@
       }
     });
 
-    // Delegated Category Filter Nav Clicks
     document.addEventListener("click", e => {
       const targetFilter = e.target.closest("[data-f]");
       if (targetFilter && (targetFilter.tagName !== "BUTTON" || targetFilter.classList.contains("chip"))) {
@@ -1343,7 +1386,6 @@
       }
     });
 
-    // UI Drawer Handlers
     $("#bag").onclick = () => toggleCart(true);
     $("#x").onclick = () => toggleCart(false);
     $("#ov").onclick = () => toggleCart(false);
@@ -1352,15 +1394,12 @@
       if (e.key === "Escape") toggleCart(false);
     });
 
-    // Mobile Navbar Toggle
     $("#mb").onclick = () => $("#hd").classList.toggle("open");
 
-    // Checkout Click Placeholder
     $("#co").onclick = () => {
       showToast(cartItems.length ? "Checkout isn’t connected yet. This is a demo store." : "Your bag is empty.");
     };
 
-    // Newsletter Submission
     $("#nf").onsubmit = e => {
       e.preventDefault();
       e.target.reset();
@@ -1370,16 +1409,13 @@
     /* ==========================================================================
        Initial Bootstrapping
        ========================================================================== */
-    // Inject static decorative vector art into designated containers
     document.querySelectorAll("[data-art]").forEach(el => {
       const [shape, color] = el.dataset.art.split(",");
       el.innerHTML = renderArtSvg({ s: shape, g: color, b: "transparent" });
     });
 
-    // Render components and initialize image assets
     renderProducts();
     updateCartUI();
-    document.querySelectorAll("[data-wm]").forEach(img => img.src = WM);
   </script>
 </body>
 </html>
